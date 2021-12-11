@@ -12,7 +12,7 @@ const Nav = () => {
 
   return <React.Fragment>
     <Button style={{ borderRadius: 50, margin: "1rem", float: "right" }} onClick={toggle}>Open</Button>
-    <Offcanvas isOpen={open} toggle={toggle}>
+    <Offcanvas isOpen={open} toggle={toggle} direction={"end"}>
       <OffcanvasBody>
         <NavButton content={"Home"} linkTo="/" />
         <NavButton content={"Player Stats"} linkTo="/stats" />
