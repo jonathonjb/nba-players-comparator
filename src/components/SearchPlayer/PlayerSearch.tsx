@@ -2,26 +2,25 @@ import React, { useState } from "react";
 import { searchPlayer } from "../../actions";
 import { connect } from "react-redux";
 import { Form, Button, Input, FormGroup, Row, Col } from "reactstrap";
+import CustomTable from "../CustomTable/CustomTable";
 
 const PlayerSearch = (props: any) => {
   const [name, setName] = useState<string>('');
 
-
-  const renderPlayer = (player: any) => {
-    return <Row>
-      <Col>{player.first_name}</Col>
-      <Col>{player.last_name}</Col>
-      <Col>{player.team.full_name}</Col>
-    </Row>
+  const getPlayerAttributes = (player: any) => {
+    return {
+      name: player.first_name + " " + player.last_name,
+      height: player.height_feet === null ? '' : player.height_feet + "'" + player.height_inches,
+      position: player.position === null ? '' : player.position,
+      team: player.team.abbreviation === null ? '' : player.team.abbreviation
+    }
   }
 
-  const renderList = () => {
-    if (!props.players.list) {
-      return;
-    }
-    return <div>
-      {props.players.list.map((player: any) => renderPlayer(player))}
-    </div>
+  const renderTable = () => {
+    const playersFields = props.players.list.map((player: any) => {
+      return getPlayerAttributes(player);
+    })
+    return <CustomTable objects={playersFields} />
   }
 
   return <React.Fragment>
@@ -31,7 +30,7 @@ const PlayerSearch = (props: any) => {
       </FormGroup>
     </Form>
     <Button onClick={() => props.searchPlayer(name)}>Submit</Button>
-    {renderList()}
+    {renderTable()}
   </React.Fragment>
 }
 
