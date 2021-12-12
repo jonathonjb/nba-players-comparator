@@ -3,15 +3,17 @@ import { Table } from 'reactstrap'
 import styled from 'styled-components';
 
 type TableProps = {
-  objects: Object[]
+  title?: string,
+  objects: Object[],
+  handleClick?: (index: number) => void
 };
 
 const CustomTable = (props: TableProps) => {
   const renderTableHead = () => {
     return <thead>
       <tr>
-        {Object.keys(props.objects[0]).map(column => {
-          return <th>
+        {Object.keys(props.objects[0]).map((column, index) => {
+          return <th key={`head-column${index}`}>
             {column}
           </th>
         })}
@@ -21,17 +23,17 @@ const CustomTable = (props: TableProps) => {
 
   const renderTableRows = () => {
     return <tbody>
-      {props.objects.map(object => {
-        return renderTableRow(object)
+      {props.objects.map((object, index) => {
+        return renderTableRow(object, index)
       })}
 
     </tbody>
   }
 
-  const renderTableRow = (object: Object) => {
-    return <HoverableRow>
-      {Object.values(object).map(value => {
-        return <td>
+  const renderTableRow = (object: Object, index: number) => {
+    return <HoverableRow key={`row${index}`} onClick={() => { props.handleClick && props.handleClick(index) }}>
+      {Object.values(object).map((value, colIndex) => {
+        return <td key={`row${index}col${colIndex}`}>
           {value}
         </td>
       })}
@@ -39,6 +41,7 @@ const CustomTable = (props: TableProps) => {
   }
 
   return <React.Fragment>
+    <TableTitle>{props.title}</TableTitle>
     <Table>
       {renderTableHead()}
       {renderTableRows()}
@@ -53,4 +56,8 @@ const HoverableRow = styled.tr`
     background-color: gray;
     cursor: pointer;
   }
+`
+const TableTitle = styled.h1`
+  font-size: 3rem;
+  padding-top: 3rem;
 `

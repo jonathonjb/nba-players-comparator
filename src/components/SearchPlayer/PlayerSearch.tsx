@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { searchPlayer } from "../../actions";
+import { searchPlayer, choosePlayer } from "../../actions";
 import { connect } from "react-redux";
 import { Form, Button, Input, FormGroup } from "reactstrap";
 import CustomTable from "../CustomTable/CustomTable";
+import { useNavigate } from "react-router-dom";
 
 const PlayerSearch = (props: any) => {
   const [name, setName] = useState<string>('');
+  const navigate = useNavigate();
 
   const getPlayerAttributes = (player: any) => {
     return {
@@ -17,19 +19,24 @@ const PlayerSearch = (props: any) => {
   }
 
   const renderTable = () => {
-    if (!props.players.list) {
+    if (!props.fetchedPlayers.list) {
       return null;
     }
-    const playersFields = props.players.list.map((player: any) => {
+    const playersFields = props.fetchedPlayers.list.map((player: any) => {
       return getPlayerAttributes(player);
     })
-    return <CustomTable objects={playersFields} />
+    return <CustomTable objects={playersFields} handleClick={handleClick} />
+  }
+
+  const handleClick = (index: number) => {
+    props.choosePlayer(props.fetchedPlayers.list[index]);
+    navigate(`/stats`);
   }
 
   return <React.Fragment>
     <Form>
       <FormGroup>
-        <Input name="name" type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+        <Input name="name" type="text" placeholder="Name" autoComplete="off" value={name} onChange={e => setName(e.target.value)} />
       </FormGroup>
     </Form>
     <Button onClick={() => props.searchPlayer(name)}>Submit</Button>
@@ -39,8 +46,8 @@ const PlayerSearch = (props: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    players: state.players
+    fetchedPlayers: state.fetchedPlayers
   }
 };
 
-export default connect(mapStateToProps, { searchPlayer })(PlayerSearch);
+export default connect(mapStateToProps, { searchPlayer, choosePlayer })(PlayerSearch);
