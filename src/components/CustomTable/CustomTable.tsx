@@ -3,7 +3,8 @@ import { Table } from 'reactstrap'
 import styled from 'styled-components';
 
 type TableProps = {
-  objects: Object[]
+  objects: Object[],
+  handleClick: (index: number) => void
 };
 
 const CustomTable = (props: TableProps) => {
@@ -21,15 +22,15 @@ const CustomTable = (props: TableProps) => {
 
   const renderTableRows = () => {
     return <tbody>
-      {props.objects.map(object => {
-        return renderTableRow(object)
+      {props.objects.map((object, index) => {
+        return renderTableRow(object, index)
       })}
 
     </tbody>
   }
 
-  const renderTableRow = (object: Object) => {
-    return <HoverableRow>
+  const renderTableRow = (object: Object, index: number) => {
+    return <HoverableRow onClick={() => props.handleClick(index)}>
       {Object.values(object).map(value => {
         return <td>
           {value}

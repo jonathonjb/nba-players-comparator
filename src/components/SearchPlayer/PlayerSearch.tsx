@@ -3,9 +3,11 @@ import { searchPlayer } from "../../actions";
 import { connect } from "react-redux";
 import { Form, Button, Input, FormGroup } from "reactstrap";
 import CustomTable from "../CustomTable/CustomTable";
+import { useNavigate } from "react-router-dom";
 
 const PlayerSearch = (props: any) => {
   const [name, setName] = useState<string>('');
+  const navigate = useNavigate();
 
   const getPlayerAttributes = (player: any) => {
     return {
@@ -23,7 +25,11 @@ const PlayerSearch = (props: any) => {
     const playersFields = props.players.list.map((player: any) => {
       return getPlayerAttributes(player);
     })
-    return <CustomTable objects={playersFields} />
+    return <CustomTable objects={playersFields} handleClick={handleClick} />
+  }
+
+  const handleClick = (index: number) => {
+    navigate(`/stats/${props.players.list[index].id}`);
   }
 
   return <React.Fragment>
