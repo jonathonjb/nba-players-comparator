@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 type TableProps = {
   objects: Object[],
-  handleClick: (index: number) => void
+  handleClick?: (index: number) => void
 };
 
 const CustomTable = (props: TableProps) => {
@@ -30,7 +30,7 @@ const CustomTable = (props: TableProps) => {
   }
 
   const renderTableRow = (object: Object, index: number) => {
-    return <HoverableRow key={`row${index}`} onClick={() => props.handleClick(index)}>
+    return <HoverableRow key={`row${index}`} onClick={() => { props.handleClick && props.handleClick(index) }}>
       {Object.values(object).map((value, colIndex) => {
         return <td key={`row${index}col${colIndex}`}>
           {value}
