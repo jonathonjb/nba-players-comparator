@@ -7,7 +7,7 @@ import CustomTable from "../CustomTable/CustomTable";
 const Stats = (props: any) => {
   useEffect(() => {
     props.fetchPlayerGames(props.chosenPlayer.data.id);
-  }, []);
+  }, [props]);
 
   const renderStats = () => {
     if (!props.games.data) {
