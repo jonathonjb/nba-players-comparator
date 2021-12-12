@@ -22,7 +22,6 @@ export const calculateStats = (games: any) => {
     stl: 0,
     turnover: 0
   }
-  let i = 0;
   for (let game of games.data) {
     total.pts += (game as any).pts;
     total.ast += (game as any).ast;
