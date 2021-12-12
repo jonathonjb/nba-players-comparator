@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { searchPlayer } from "../../actions";
+import { searchPlayer, choosePlayerId } from "../../actions";
 import { connect } from "react-redux";
 import { Form, Button, Input, FormGroup } from "reactstrap";
 import CustomTable from "../CustomTable/CustomTable";
@@ -19,17 +19,18 @@ const PlayerSearch = (props: any) => {
   }
 
   const renderTable = () => {
-    if (!props.players.list) {
+    if (!props.fetchedPlayers.list) {
       return null;
     }
-    const playersFields = props.players.list.map((player: any) => {
+    const playersFields = props.fetchedPlayers.list.map((player: any) => {
       return getPlayerAttributes(player);
     })
     return <CustomTable objects={playersFields} handleClick={handleClick} />
   }
 
   const handleClick = (index: number) => {
-    navigate(`/stats/${props.players.list[index].id}`);
+    props.choosePlayerId(props.fetchedPlayers.list[index].id);
+    navigate(`/stats`);
   }
 
   return <React.Fragment>
@@ -45,8 +46,8 @@ const PlayerSearch = (props: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    players: state.players
+    fetchedPlayers: state.fetchedPlayers
   }
 };
 
-export default connect(mapStateToProps, { searchPlayer })(PlayerSearch);
+export default connect(mapStateToProps, { searchPlayer, choosePlayerId })(PlayerSearch);

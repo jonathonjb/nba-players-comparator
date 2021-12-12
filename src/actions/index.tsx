@@ -1,5 +1,12 @@
-import { FETCH_PLAYER_GAMES, SEARCH_PLAYER } from "./types";
+import { CHOOSE_PLAYER_ID, FETCH_PLAYER_GAMES, SEARCH_PLAYER } from "./types";
 import balldontlie from "../apis/balldontlie";
+
+export const choosePlayerId = (id: number) => {
+  return {
+    type: CHOOSE_PLAYER_ID,
+    payload: id
+  }
+}
 
 export const searchPlayer = (name: string) => async (dispatch: any) => {
   const response = await balldontlie.get(`/players?search=${name}`);

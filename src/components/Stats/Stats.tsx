@@ -1,15 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { fetchPlayerGames } from "../../actions";
 import { connect } from "react-redux";
 
 const Stats = (props: any) => {
-  useEffect(() => {
-    props.fetchPlayerGames();
-  }, [props])
 
   return <React.Fragment>
-
   </React.Fragment>
 }
 
-export default connect(null, { fetchPlayerGames })(Stats);
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    games: state.games
+  }
+}
+
+export default connect(mapStateToProps, { fetchPlayerGames })(Stats);
