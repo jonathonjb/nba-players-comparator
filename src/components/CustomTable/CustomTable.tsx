@@ -11,8 +11,8 @@ const CustomTable = (props: TableProps) => {
   const renderTableHead = () => {
     return <thead>
       <tr>
-        {Object.keys(props.objects[0]).map(column => {
-          return <th>
+        {Object.keys(props.objects[0]).map((column, index) => {
+          return <th key={`head-column${index}`}>
             {column}
           </th>
         })}
@@ -30,9 +30,9 @@ const CustomTable = (props: TableProps) => {
   }
 
   const renderTableRow = (object: Object, index: number) => {
-    return <HoverableRow onClick={() => props.handleClick(index)}>
-      {Object.values(object).map(value => {
-        return <td>
+    return <HoverableRow key={`row${index}`} onClick={() => props.handleClick(index)}>
+      {Object.values(object).map((value, colIndex) => {
+        return <td key={`row${index}col${colIndex}`}>
           {value}
         </td>
       })}
