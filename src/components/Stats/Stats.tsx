@@ -6,7 +6,7 @@ import CustomTable from "../CustomTable/CustomTable";
 
 const Stats = (props: any) => {
   useEffect(() => {
-    props.fetchPlayerGames(props.chosenPlayerId.id);
+    props.fetchPlayerGames(props.chosenPlayer.data.id);
   }, []);
 
   const renderStats = () => {
@@ -28,7 +28,7 @@ const Stats = (props: any) => {
 
 const mapStateToProps = (state: any, ownProps: any) => {
   return {
-    chosenPlayerId: state.chosenPlayerId,
+    chosenPlayer: state.chosenPlayer,
     games: state.games
   }
 }

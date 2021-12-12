@@ -1,10 +1,10 @@
-import { CHOOSE_PLAYER_ID, FETCH_PLAYER_GAMES, SEARCH_PLAYER } from "./types";
+import { CHOOSE_PLAYER, FETCH_PLAYER_GAMES, SEARCH_PLAYER } from "./types";
 import balldontlie from "../apis/balldontlie";
 
-export const choosePlayerId = (id: number) => {
+export const choosePlayer = (player: Object) => {
   return {
-    type: CHOOSE_PLAYER_ID,
-    payload: id
+    type: CHOOSE_PLAYER,
+    payload: player
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { searchPlayer, choosePlayerId } from "../../actions";
+import { searchPlayer, choosePlayer } from "../../actions";
 import { connect } from "react-redux";
 import { Form, Button, Input, FormGroup } from "reactstrap";
 import CustomTable from "../CustomTable/CustomTable";
@@ -29,7 +29,7 @@ const PlayerSearch = (props: any) => {
   }
 
   const handleClick = (index: number) => {
-    props.choosePlayerId(props.fetchedPlayers.list[index].id);
+    props.choosePlayer(props.fetchedPlayers.list[index]);
     navigate(`/stats`);
   }
 
@@ -50,4 +50,4 @@ const mapStateToProps = (state: any) => {
   }
 };
 
-export default connect(mapStateToProps, { searchPlayer, choosePlayerId })(PlayerSearch);
+export default connect(mapStateToProps, { searchPlayer, choosePlayer })(PlayerSearch);
