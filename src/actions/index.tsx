@@ -1,4 +1,4 @@
-import { SEARCH_PLAYER } from "./types";
+import { FETCH_PLAYER_GAMES, SEARCH_PLAYER } from "./types";
 import balldontlie from "../apis/balldontlie";
 
 export const searchPlayer = (name: string) => async (dispatch: any) => {
@@ -7,5 +7,22 @@ export const searchPlayer = (name: string) => async (dispatch: any) => {
   dispatch({
     type: SEARCH_PLAYER,
     payload: response.data.data
+  })
+}
+
+export const fetchPlayerGames = (id: number) => async (dispatch: any) => {
+  let response: any = await balldontlie.get(`/stats?player_ids[]=${id}&per_page=1000`)
+  console.log(`/stats?player_ids[]=${id}&per_page=1000`)
+  console.log('RESPONSE:', response);
+  // let games = response.data.data;
+  // for (let page = 1; page < response.meta.total_pages; page += 1) {
+  //   let response: any = await balldontlie.get(`/stats?player_ids[]=${id}&per_page=1000&page${page}`)
+  //   games = games.concat(response.data.data);
+  // }
+
+  dispatch({
+    type: FETCH_PLAYER_GAMES,
+    // payload: games
+    payload: 'games'
   })
 }

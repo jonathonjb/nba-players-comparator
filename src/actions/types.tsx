@@ -1,1 +1,2 @@
 export const SEARCH_PLAYER = 'SEARCH_PLAYER';
+export const FETCH_PLAYER_GAMES = 'FETCH_PLAYER_STATS';
