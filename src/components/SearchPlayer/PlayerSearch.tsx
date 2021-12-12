@@ -36,7 +36,7 @@ const PlayerSearch = (props: any) => {
   return <React.Fragment>
     <Form>
       <FormGroup>
-        <Input name="name" type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+        <Input name="name" type="text" placeholder="Name" autoComplete="off" value={name} onChange={e => setName(e.target.value)} />
       </FormGroup>
     </Form>
     <Button onClick={() => props.searchPlayer(name)}>Submit</Button>

@@ -5,6 +5,6 @@ import chosenPlayerIdReducer from "./chosenPlayerIdReducer";
 
 export default combineReducers({
   fetchedPlayers: fetchedPlayersReducer,
-  chosenPlayer: chosenPlayerIdReducer,
+  chosenPlayerId: chosenPlayerIdReducer,
   games: gamesReducers
 })
