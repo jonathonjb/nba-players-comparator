@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'reactstrap'
+import styled from 'styled-components';
 
 type TableProps = {
   objects: Object[]
@@ -28,13 +29,13 @@ const CustomTable = (props: TableProps) => {
   }
 
   const renderTableRow = (object: Object) => {
-    return <tr>
+    return <HoverableRow>
       {Object.values(object).map(value => {
         return <td>
           {value}
         </td>
       })}
-    </tr>
+    </HoverableRow>
   }
 
   return <React.Fragment>
@@ -46,3 +47,10 @@ const CustomTable = (props: TableProps) => {
 };
 
 export default CustomTable;
+
+const HoverableRow = styled.tr`
+  &:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+`

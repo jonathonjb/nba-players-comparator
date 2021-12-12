@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { searchPlayer } from "../../actions";
 import { connect } from "react-redux";
-import { Form, Button, Input, FormGroup, Row, Col } from "reactstrap";
+import { Form, Button, Input, FormGroup } from "reactstrap";
 import CustomTable from "../CustomTable/CustomTable";
 
 const PlayerSearch = (props: any) => {
@@ -17,6 +17,9 @@ const PlayerSearch = (props: any) => {
   }
 
   const renderTable = () => {
+    if (!props.players.list) {
+      return null;
+    }
     const playersFields = props.players.list.map((player: any) => {
       return getPlayerAttributes(player);
     })
