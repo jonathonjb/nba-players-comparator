@@ -18,10 +18,10 @@ export const searchPlayer = (name: string) => async (dispatch: any) => {
 }
 
 export const fetchPlayerGames = (id: number) => async (dispatch: any) => {
-  let response: any = await balldontlie.get(`/stats?player_ids[]=${id}&per_page=1000`)
-  let games = response.data.data;
-  for (let page = 1; page < response.data.meta.total_pages; page += 1) {
-    let response: any = await balldontlie.get(`/stats?player_ids[]=${id}&per_page=1000&page${page}`)
+  let response: any = await balldontlie.get(`/stats?player_ids[]=${id}&per_page=100/`)
+  let games: any = response.data.data;
+  for (let page = 2; page <= response.data.meta.total_pages; page += 1) {
+    let response: any = await balldontlie.get(`/stats?player_ids[]=${id}&per_page=1000&page=${page}`)
     games = games.concat(response.data.data);
   }
 

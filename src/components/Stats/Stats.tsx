@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { fetchPlayerGames } from "../../actions";
 import { connect } from "react-redux";
-import { calculateStats } from "../CalculateStats/calculateStats";
+import { calculateStats } from "../../CalculateStats/calculateStats";
 import CustomTable from "../CustomTable/CustomTable";
 
 const Stats = (props: any) => {
