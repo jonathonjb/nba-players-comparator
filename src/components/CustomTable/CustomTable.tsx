@@ -3,6 +3,7 @@ import { Table } from 'reactstrap'
 import styled from 'styled-components';
 
 type TableProps = {
+  title?: string,
   objects: Object[],
   handleClick?: (index: number) => void
 };
@@ -40,6 +41,7 @@ const CustomTable = (props: TableProps) => {
   }
 
   return <React.Fragment>
+    <TableTitle>{props.title}</TableTitle>
     <Table>
       {renderTableHead()}
       {renderTableRows()}
@@ -54,4 +56,8 @@ const HoverableRow = styled.tr`
     background-color: gray;
     cursor: pointer;
   }
+`
+const TableTitle = styled.h1`
+  font-size: 3rem;
+  padding-top: 3rem;
 `

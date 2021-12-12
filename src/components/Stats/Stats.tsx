@@ -15,9 +15,12 @@ const Stats = (props: any) => {
     }
 
     const total: any = calculateStats(props.games);
+    const name = props.chosenPlayer.data.first_name + " " + props.chosenPlayer.data.last_name;
 
     if (total) {
-      return <CustomTable objects={[total]} />
+      return <div>
+        <CustomTable title={name} objects={[total]} />
+      </div>
     }
   }
 
