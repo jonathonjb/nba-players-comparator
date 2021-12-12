@@ -17,6 +17,9 @@ const PlayerSearch = (props: any) => {
   }
 
   const renderTable = () => {
+    if (!props.players.list) {
+      return null;
+    }
     const playersFields = props.players.list.map((player: any) => {
       return getPlayerAttributes(player);
     })
